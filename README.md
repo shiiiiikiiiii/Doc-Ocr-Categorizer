@@ -62,7 +62,6 @@ It aims to automate the traditionally manual process of categorizing documents w
 DocOcrCategorizer
 - frontend
 - backend
-- ocr
-- nlp
+- model
 - README.md
 ```
