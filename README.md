@@ -58,7 +58,7 @@ It aims to automate the traditionally manual process of categorizing documents w
 
 ## File Structure
 
-```
+```markdown
 DocOcrCategorizer
 - frontend
 - backend
