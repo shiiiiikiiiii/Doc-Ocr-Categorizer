@@ -1,2 +1,3 @@
-venvs
-.gitmodules
+# pyenv setting
+.python-version
+.gitattributes
