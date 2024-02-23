@@ -33,16 +33,9 @@
 
 ```
 /DocOcrCategorizer
-|-- frontend
-|   |-- src
-|-- backend
-|   |-- app
-|-- ocr
-|   |-- src
-|   |-- models
-|-- nlp
-|   |-- src
-|   |-- models
+|-- src
+|   |-- frontend
+|   |-- backend
 |-- README.md
 ```
 
