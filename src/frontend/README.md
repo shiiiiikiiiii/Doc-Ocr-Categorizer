@@ -25,144 +25,90 @@
 # Cited Repo's Readme
 
 ```markdown
-<p align="center">
-   <a href="https://nlrx-wjc.github.io/react-antd-admin-template/" target="_blank">
-      <img src="./logo.png"/>
-   </a>
-</p>
+  <p align="center">
+    <a href="http://github.com/zuiidea/antd-admin">
+      <img alt="antd-admin" height="64" src="./docs/_media/logo.svg">
+    </a>
+  </p>
 
-# 简介
+  <h1 align="center">AntD Admin</h1>
 
-[react-antd-admin-template](https://nlrx-wjc.github.io/react-antd-admin-template/) 是一个基于 `React` 和 `Ant Design` 的后台管理系统模板。它内置了用户登录/登出，动态路由，权限校验，用户管理等典型的业务模型，可以帮助你快速搭建企业级中后台产品原型，是你接私活的不二之选。
+  <div align="center">
 
-本系统的开发灵感来自 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin/) ，这是一个基于 `Vue` 和 `ElementUI` 的优秀的后台管理系统模板，在这里向大佬致敬！
+  An excellent front-end solution for enterprise applications.
 
-其实我的主技术栈一直是 `Vue`，只是最近入坑了 `React` ，看了大半个月文档，就想牛刀小试一下，哈哈。不是有那句话么：检验学习成果最好的方式就是造轮子。所以就造了这么个轮子，哈哈。对于 `React` ，我还是个小白，项目中肯定有做的不够好的地方，欢迎各位同好提 `pr` 或 `issue` 。
+  [![antd](https://img.shields.io/badge/antd-^4.0.0-blue.svg?style=flat-square)](https://github.com/ant-design/ant-design)
+  [![umi](https://img.shields.io/badge/umi-^2.2.1-orange.svg?style=flat-square)](https://github.com/umijs/umi)
+  [![GitHub issues](https://img.shields.io/github/issues/zuiidea/antd-admin.svg?style=flat-square)](https://github.com/zuiidea/antd-admin/issues)
+  [![MIT](https://img.shields.io/dub/l/vibe-d.svg?style=flat-square)](http://opensource.org/licenses/MIT)
+  ![Travis (.org)](https://img.shields.io/travis/zuiidea/antd-admin.svg)
+  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/zuiidea/antd-admin/pulls)
+  [![Gitter](https://img.shields.io/gitter/room/antd-admin/antd-admin.svg)](https://gitter.im/antd-admin/antd-admin)
 
-- [在线预览](https://nlrx-wjc.github.io/react-antd-admin-template/)
-- [Gitee在线预览(国内用户可访问该地址)](https://nlrx.gitee.io/react-antd-admin-template/)
-- [开发文档](https://nlrx-wjc.github.io/react-antd-admin-template-doc/) 目前还在持续编写完善中...
+  </div>
 
-# 功能
+  - Preview - [https://antd-admin.zuiidea.com](https://antd-admin.zuiidea.com)
+  - Documentation - [https://superlbr.gitee.io/antd-admin](https://superlbr.gitee.io/antd-admin)
+  - FAQ - [https://doc.antd-admin.zuiidea.com/#/faq](https://doc.antd-admin.zuiidea.com/#/faq)
+  - ChangeLog - [https://doc.antd-admin.zuiidea.com/#/change-log](https://doc.antd-admin.zuiidea.com/#/change-log)
 
-```bash
-- 登录 / 注销
+  English | [简体中文](./README-zh_CN.md) 
 
-- 权限验证
-  - 页面权限
-  - 路由权限
+  ## Features
 
-- 全局功能
-  - 动态侧边栏（支持多级路由嵌套）
-  - 动态面包屑
-  - 本地/后端 mock 数据
-  - Screenfull全屏
-  - 自适应收缩侧边栏
-
-- 编辑器
-  - 富文本
-  - Markdown
-
-- Excel
-  - 导出excel
-  - 导入excel
-  - 前端可视化excel
-
-- Zip
-  - 导出zip
-
-- 错误页面
-  - 404
-
-- 组件
-  - 拖拽列表
-
-- 表格
-- Dashboard
-- 引导页
-- ECharts 图表
-- 剪贴板
+  - Internationalization, extracting translation fields from source code, loading language packs on demand
+  - Dynamic permissions, different permissions for different menus
+  - Elegant and beautiful, Ant Design system
+  - Mock data, local data debugging
 
 
-# 目录结构
+  ## Usage
 
-```bash
-├─ public                     # 静态资源
-│   ├─ favicon.ico            # favicon图标
-│   └─ index.html             # html模板
-├─ src                        # 项目源代码
-│   ├─ api                    # 所有请求
-│   ├─ assets                 # 图片 字体等静态资源
-│   ├─ components             # 全局公用组件
-│   ├─ config                 # 全局配置
-│   │   ├─ menuConfig.js      # 导航菜单配置
-│   │   └─ routeMap.js        # 路由配置
-│   ├─ lib                    # 第三方库按需加载
-│   ├─ mock                   # 项目mock 模拟数据
-│   ├─ store                  # 全局 store管理
-│   ├─ styles                 # 全局样式
-│   ├─ utils                  # 全局公用方法
-│   ├─ views                  # views 所有页面
-│   ├─ App.js                 # 入口页面
-│   ├─ defaultSettings.js     # 全局默认配置
-│   └─index.js                # 源码入口
-├── .env.development          # 开发环境变量配置
-├── .env.production           # 生产环境变量配置
-├── config-overrides.js       # 对cra的webpack自定义配置
-├── deploy.sh                 # CI部署脚本
-├── .travis.yml               # 自动化CI配置
-└── package.json              # package.json
+  1. Clone project code.
+
+  ```bash
+  git clone https://github.com/zuiidea/antd-admin.git my-project
+  cd my-project
 
 
-# 安装
+  2. Installation dependence.
 
-```shell
-# 克隆项目
-git clone https://github.com/NLRX-WJC/react-antd-admin-template.git
-
-# 进入项目目录
-cd react-antd-admin-template
-
-# 安装依赖
-npm install
-
-# 切换淘宝源，解决 npm 下载速度慢的问题
-npm install --registry=https://registry.npm.taobao.org
-
-# 启动服务
-npm start
+  ```bash
+  yarn install
 
 
-启动完成后会自动打开浏览器访问 [http://localhost:3000](http://localhost:3000)， 你看到下面的页面就代表操作成功了。
+  Or
 
-![](./guide.gif)
+  ```bash
+  npm install
 
-接下来你可以修改代码进行业务开发了。
 
-# 关于作者
+  3. Start local server.
 
-大家好，我是难凉热血。
+  ```bash
+  npm run start
 
-终南山下码农一枚，师从道长王重阳，酷爱打码，崇尚开源精神，乐于分享。
 
-2005年服役于中国人民解放军东南战区狼牙特种大队，担任狙击手。
+  4. After the startup is complete, open a browser and visit [http://localhost:7000](http://localhost:7000), If you need to change the startup port, you can configure it in the `.env` file.
 
-2008年受俄罗斯阿尔法特种部队邀请，执教于该特种部队第一大队教授其队员学习中国特色社会主义理论及毛泽东思想。
+  5. For login page, there're two account. Username: admin Password: admin / Username: guest Password: guest
 
-2011年竞选美国总统落选，遂心灰意冷，放下所有荣誉，隐居终南山下。
+  > More instructions at [documentation](https://doc.antd-admin.zuiidea.com)。
 
-2015年受道长王重阳委托，为道观开发香火管理系统，遂沉迷IT，无法自拔。
 
-喜欢折腾和搞机，追求新鲜技术。
+  ## Browsers support
 
-下边是我的微信，欢迎同好伙伴一起树(tree)新(new)风(bee)！！！
+  Modern browsers.
 
-![](./wechat.jpg)
+  | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
+  | --------- | --------- | --------- | --------- | --------- | 
+  |IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions
 
-# 鼓励作者
+  ## Contributing
 
-作为个人开发者，维护开源实属不易。如果您觉得本项目对你有些许帮助的话，还请帮忙点个 star 哈~~
-如果您有余力的话也非常感谢您对我的赞赏，您的赞赏，是对我创作最大的认可和鼓励。
+  We very much welcome your contribution, you can build together with us in the following ways :smiley: 
 
-![](./pay.png)
+  - Use Ant Design Pro in your daily work.
+  - Submit [GitHub issues](http://github.com/zuiidea/antd-admin/issues)s to report bugs or ask questions.
+  - Propose [Pull Request](http://github.com/zuiidea/antd-admin/pulls) to improve our code.
 ```
