@@ -1,9 +1,9 @@
 [tool.poetry]
-name = "fastapi-realworld-example-app"
-version = "0.0.0"
-description = "Backend logic implementation for https://github.com/gothinkster/realworld with awesome FastAPI"
-authors = ["Nik Sidnev <sidnev.nick@gmail.com>"]
-license = "MIT"
+name = "DocOcrCategorizeer-backend"
+version = "0.0.1"
+description = "Backend logic implementation for https://github.com/shiiiiikiiiii/DocOcrCategorizeer"
+authors = ["Junxiao Liao"]
+license = "GPL-3.0-or-later"
 
 [tool.poetry.dependencies]
 python = "^3.9"
