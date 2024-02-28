@@ -1,53 +1,22 @@
 [tool.poetry]
-name = "fast-api-lms"
+name = "backend"
 version = "0.1.0"
-description = ""
-authors = ["Gwendolyn Faraday <gwenfaraday@pm.me>"]
+description = "FastAPI backend for DocOcrCategorizeer"
+authors = ["Junxiao Liao"]
+license = "GPL-3"
+readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
-uvicorn = "^0.16.0"
-fastapi = "^0.70.1"
-pydantic = "^1.8.2"
-SQLAlchemy = "^1.4.28"
-psycopg2-binary = "^2.9.2"
-SQLAlchemy-Utils = "^0.37.9"
-alembic = "^1.7.5"
-asyncpg = "^0.25.0"
+python = "^3.11"
+fastapi = "^0.110.0"
+sqlalchemy = "^2.0.27"
+alembic = "^1.13.1"
+uvicorn = "^0.27.1"
+psycopg2 = "^2.9.9"
+asyncpg = "^0.29.0"
+sqlalchemy-utils = "^0.41.1"
 
-[tool.poetry.dev-dependencies]
-flake8 = "^4.0.1"
-black = "^21.12b0"
-pre-commit = "^2.16.0"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-[flake8]
-ignore = ["E203", "E266", "E501", "W503", "F403", "F401"]
-max-line-length = 79
-max-complexity = 18
-select = ["B", "C", "E", "F", "W", "T4", "B9"]
-
-[tool.black]
-line-length = 79
-target-version = ['py37']
-include = '\.pyi?$'
-exclude = '''
-/(
-    \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | venv
-  | _build
-  | buck-out
-  | build
-  | dist
-  | migrations
-  | alembic
-)/
-'''
