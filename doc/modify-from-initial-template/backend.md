@@ -1,52 +1,54 @@
 1. template项目文件
 
   ```sh
-  ~/DocOcrCategorizeer/src/frontend$ ls
-  LICENSE    assets  jest.config.js  mock          package-lock.json  public  scripts
-  README.md  docs    manifest.json   node_modules  package.json       run.sh  src
+  ~/DocOcrCategorizeer/src/backend$ ls
+  Dockerfile  alembic.ini  docker-compose.yml  postman         readme.md     scripts    tests
+  LICENSE     app          poetry.lock         pyproject.toml  run_debug.sh  setup.cfg
 
-  ~/DocOcrCategorizeer/src/frontend/src$ ls
-  components  e2e  layouts  locales  models  pages  plugins  services  themes  utils
+  ~/DocOcrCategorizeer/src/backend/app$ ls
+  __init__.py  __pycache__  api  core  db  main.py  models  resources  services
   ```
 
 2. 调整
 
   ```markdown
-  1\. 可以保留复用的部分:
+  1\. 保留下来复用的部分:
 
-  - src/utils目录下的工具函数,如请求处理函数request.js等。
+  - 主程序main.py,包括FastAPI的实例化和启动代码
 
-  - src/components目录下的通用组件,如Layout布局组件等。
+  - 核心逻辑代码app/core目录下的配置、日志等模块
 
-  - src/services目录下的接口请求层抽象。
+  - 数据库访问层app/db目录下的代码
 
-  - 项目的总体技术架构和配置,如webpack配置,路由管理等。
+  - Pydantic模型和Schema的基类app/models/rwschema.py
 
-  2\. 需要删除的:
+  - 工具类和基类等公共代码
 
-  - src/pages目录下的所有页面组件
+  2\. 需要删除的部分:
 
-  - src/models目录下的redux数据模型
+  - app/api/routes目录下的所有现有路由
 
-  - src/services里无关的接口请求代码
+  - app/models/domain和app/models/schemas下的现有模型类
 
-  3\. 可以忽略的:
+  - app/services下的现有业务逻辑代码
 
-  - src/e2e目录下的端对端测试
+  - app/db/queries下的现有SQL
 
-  - 不相关的样式文件
+  3\. 可以忽略的部分:
 
-  - 一些架构相关但现在用不到的配置
+  - 测试用例,可以先忽略
 
-  4\. 需要自己新增的:
+  - 一些辅助脚本,比如docker镜像构建等
 
-  - 新的pages页面组件
+  4\. 然后针对自己的需求新增:
 
-  - 自己的models数据模型 
+  - app/api/routes下新增路由 
 
-  - 自己的services接口请求
+  - app/models下新增模型类
 
-  - 业务组件components
+  - app/services下新增业务逻辑
 
-  - 路由配置等与业务相关的代码
+  - app/db/queries下新增SQL
+
+  - 必要的单元测试用例
   ```
