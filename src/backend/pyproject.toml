@@ -3,7 +3,7 @@ name = "backend"
 version = "0.1.0"
 description = "FastAPI backend for DocOcrCategorizeer"
 authors = ["Junxiao Liao"]
-license = "GPL-3"
+license = "GPL-3.0-or-later"
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -12,7 +12,7 @@ fastapi = "^0.110.0"
 sqlalchemy = "^2.0.27"
 alembic = "^1.13.1"
 uvicorn = "^0.27.1"
-psycopg2 = "^2.9.9"
+psycopg2-binary = "^2.9.9"
 asyncpg = "^0.29.0"
 sqlalchemy-utils = "^0.41.1"
 
