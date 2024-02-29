@@ -31,7 +31,7 @@
 
 ### 文件结构
 
-```
+```text
 /DocOcrCategorizer
 |-- src
 |   |-- frontend
