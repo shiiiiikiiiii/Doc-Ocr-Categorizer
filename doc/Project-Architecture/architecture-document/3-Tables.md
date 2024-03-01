@@ -9,7 +9,7 @@ _在`>`中标注的行表示现版本先不设计该表/该字段_
 1. **image表：**
 
   - `id` - 图片唯一标识符
-  - `file_key`: sqlalchemy.URLType - 存储在MinIO中的图片文件的唯一标识符
+  - `file_key`: sqlalchemy_utils.URLType - 存储在MinIO中的图片文件的唯一标识符
   - `document_id` - 外键关联到document表，表示该图片属于哪个文档
 
 2. **document表：**
