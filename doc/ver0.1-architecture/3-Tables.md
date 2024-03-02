@@ -29,7 +29,7 @@
 图片存储到MinIO数据库, 供这个表查找
 
 ```markdown
-**DocumentImages表：**
+**image表：**
 
 - `file_key` - 存储在MinIO中的图片文件的唯一标识符
 ```
