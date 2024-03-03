@@ -8,9 +8,9 @@ from sqlalchemy.orm import Session
 def process_image(file: UploadFile, db: Session) -> dict:
     # Create MinIO client
     client = Minio(
-        "your-minio-server:9000",
-        access_key="YOUR-ACCESSKEY",
-        secret_key="YOUR-SECRETKEY",
+        "localhost:6900",
+        access_key="admin",
+        secret_key="password",
         secure=False,
     )
 
@@ -18,9 +18,9 @@ def process_image(file: UploadFile, db: Session) -> dict:
     file_contents = file.file.read()
     object_name = f"{file.filename}"
     client.put_object(
-        "my-bucket", object_name, file_contents, length=len(file_contents)
+        "image-bucket", object_name, file_contents, length=len(file_contents)
     )
-    image_url = client.presigned_get_object("my-bucket", object_name)
+    image_url = client.presigned_get_object("image-bucket", object_name)
 
     # OCR recognition using RapidOCR
     engine = RapidOCR()

@@ -1,11 +1,10 @@
 from pydantic import BaseModel
-from sqlalchemy_utils import URLType
 
 
 # Image Pydantic Model
 class Image(BaseModel):
     id: int
-    file_key: URLType
+    file_key: str
     document_id: int
 
 
