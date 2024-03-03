@@ -80,7 +80,7 @@ const MyLayout = ({ children }: any) => {
     >
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className='logo'>
-          <img src={logo} alt='好大夫' />
+          <img src={logo} alt='文档分类' />
         </div>
         <Menu
           theme='light'
