@@ -2,8 +2,8 @@ from sqlalchemy import Column, Integer, String, JSON, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy_utils import URLType
 
-from backend.db.models.utils.mixins import Timestamp
-from backend.db.db_setup import Base
+from db.models.utils.mixins import Timestamp
+from db.db_setup import Base
 
 
 # Image SQLAlchemy ORM Model
