@@ -11,3 +11,7 @@ For `xxx` CRUD functionality, follow the following steps to trace:
 2. ./db/models/xxx.py: orm definition of `xxx`
 3. ./api/xxx.py: router settings for `xxx`
 4. ./api/utils/xxx.py: helper functions of `xxx` that will be use by the router
+
+# Referred Template Tutorial
+
+[(Faraday Academy) Fast API Crash Course Code-along | Build an app with Postgres, SQL Alchemy, Async, and more](https://www.youtube.com/watch?v=gQTRsZpR7Gw)
