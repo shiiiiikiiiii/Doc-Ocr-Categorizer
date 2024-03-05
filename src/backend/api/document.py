@@ -1,6 +1,6 @@
 from db.db_setup import get_db
 from fastapi import APIRouter, HTTPException, Depends, File, UploadFile, Query
-from api.utils.image_processor import process_image_async
+from api.dl_models_util.image_processor import process_image_async
 from pydantic_schemas.pydantic_schema import Document, Category
 from sqlalchemy.orm import Session
 
