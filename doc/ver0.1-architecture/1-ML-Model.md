@@ -1,6 +1,6 @@
 ## OCR与NLP具体模型选择和调试计划
 
-1. OCR部分采用PaddleOCR的PP-OCRv3模型,该模型模型体积小,预测速度快,适合于文档图片到文本转换任务。由于PaddleOCR部署和调用不是很方便, 所以选用了基于PaddleOCR, 方便部署的RapidOCR
+1. _由于PaddleOCR部署和调用不是很方便,_ 选用了基于PaddleOCR, 方便部署的RapidOCR
 
 ### 推荐算法进行文档分类推荐
 
