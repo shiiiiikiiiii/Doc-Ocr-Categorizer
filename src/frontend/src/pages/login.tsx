@@ -29,7 +29,7 @@ function Login() {
             width: '200px',
           }}
         />
-        <Card title='好大夫平台管理系统'>
+        <Card title='文档OCR分类系统'>
           <Form
             labelCol={{
               md: {

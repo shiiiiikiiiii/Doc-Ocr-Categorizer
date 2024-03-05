@@ -106,7 +106,7 @@ const MyLayout = ({ children }: any) => {
               onClick: () => setCollapsed(!collapsed),
             }
           )}
-          <span className='app-title'>好大夫平台管理系统</span>
+          <span className='app-title'>文档OCR分类系统</span>
           <Dropdown
             menu={{
               items: [
