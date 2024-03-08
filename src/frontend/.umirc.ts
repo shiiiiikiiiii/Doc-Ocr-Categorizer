@@ -20,6 +20,21 @@ export default defineConfig({
       component: './Home',
     },
     {
+      name: '文档分类管理',
+      path: '/category',
+      component: './Home',
+    },
+    {
+      name: '上传文档',
+      path: '/upload',
+      component: './Home',
+    },
+    {
+      name: '搜索文档',
+      path: '/search',
+      component: './Home',
+    },
+    {
       name: '权限演示',
       path: '/access',
       component: './Access',
