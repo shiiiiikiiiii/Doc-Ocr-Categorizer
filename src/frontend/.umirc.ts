@@ -32,7 +32,7 @@ export default defineConfig({
     {
       name: '搜索文档',
       path: '/search',
-      component: './Home',
+      component: './SearchDocument',
     },
     {
       name: '(umi)权限演示',

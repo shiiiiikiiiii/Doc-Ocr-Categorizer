@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const API_BASE_URL = 'http://localhost:8001';
 
+// APIs for category management
 export const getCategories = async () => {
   const response = await axios.get(`${API_BASE_URL}/categories`);
   return response.data;
@@ -20,4 +21,16 @@ export const updateCategory = async (categoryId, updatedCategory) => {
 
 export const deleteCategory = async (categoryId) => {
   await axios.delete(`${API_BASE_URL}/categories/${categoryId}`);
+};
+
+// API for search document
+export const searchDocuments = async (query) => {
+  const response = await axios.get(`${API_BASE_URL}/documents/search?query=${query}`);
+  return response.data;
+};
+
+// APIs for document management
+export const updateDocumentCategory = async (documentId, newCategory) => {
+  const response = await axios.post(`${API_BASE_URL}/documents/${documentId}/category`, { category: newCategory });
+  return response.data;
 };
