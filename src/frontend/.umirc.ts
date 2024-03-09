@@ -22,7 +22,7 @@ export default defineConfig({
     {
       name: '文档分类管理',
       path: '/category',
-      component: './Home',
+      component: './CategoryManagement',
     },
     {
       name: '上传文档',
@@ -35,12 +35,12 @@ export default defineConfig({
       component: './Home',
     },
     {
-      name: '权限演示',
+      name: '(umi)权限演示',
       path: '/access',
       component: './Access',
     },
     {
-      name: ' CRUD 示例',
+      name: '(umi)CRUD 示例',
       path: '/table',
       component: './Table',
     },
