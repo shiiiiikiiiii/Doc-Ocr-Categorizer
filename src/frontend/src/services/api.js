@@ -38,3 +38,15 @@ export const updateDocumentCategory = async (documentId, newCategory) => {
   const response = await axios.post(`${API_BASE_URL}/documents/${documentId}/category`, { category: newCategory });
   return response.data;
 };
+
+export const uploadDocument = async (file) => {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const response = await axios.post(`${API_BASE_URL}/upload`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data;
+};

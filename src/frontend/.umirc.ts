@@ -22,7 +22,7 @@ export default defineConfig({
     {
       name: '上传文档',
       path: '/upload',
-      component: './Home',
+      component: './UploadDocument',
     },
     {
       name: '搜索文档',
