@@ -20,11 +20,6 @@ export default defineConfig({
       component: './Home',
     },
     {
-      name: '文档分类管理',
-      path: '/category',
-      component: './CategoryManagement',
-    },
-    {
       name: '上传文档',
       path: '/upload',
       component: './Home',
@@ -35,15 +30,25 @@ export default defineConfig({
       component: './SearchDocument',
     },
     {
-      name: '(umi)权限演示',
-      path: '/access',
-      component: './Access',
+      name: '文档分类管理',
+      path: '/category',
+      component: './CategoryManagement',
     },
     {
-      name: '(umi)CRUD 示例',
-      path: '/table',
-      component: './Table',
+      // parameter `name` not set, so will not be shown in the list
+      path: '/category/:categoryId',
+      component: './CategoryDetail',
     },
+    // {
+    //   name: '(umi)权限演示',
+    //   path: '/access',
+    //   component: './Access',
+    // },
+    // {
+    //   name: '(umi)CRUD 示例',
+    //   path: '/table',
+    //   component: './Table',
+    // },
   ],
   npmClient: 'npm',
 });

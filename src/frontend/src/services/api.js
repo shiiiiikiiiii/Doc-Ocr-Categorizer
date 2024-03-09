@@ -1,4 +1,3 @@
-// 这里只展示与文档分类相关的 API 请求函数
 import axios from 'axios';
 
 const API_BASE_URL = 'http://localhost:8001';
@@ -26,6 +25,11 @@ export const deleteCategory = async (categoryId) => {
 // API for search document
 export const searchDocuments = async (query) => {
   const response = await axios.get(`${API_BASE_URL}/documents/search?query=${query}`);
+  return response.data;
+};
+
+export const getDocumentsByCategory = async (categoryId) => {
+  const response = await axios.get(`${API_BASE_URL}/categories/${categoryId}/documents`);
   return response.data;
 };
 

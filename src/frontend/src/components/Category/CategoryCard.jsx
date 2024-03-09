@@ -7,6 +7,7 @@ import { deleteCategory } from '@/services/api';
 const { Meta } = Card;
 
 const CategoryCard = ({ category }) => {
+  const history = useHistory();
   const [showEditDialog, setShowEditDialog] = useState(false);
 
   const handleEdit = () => {
@@ -20,6 +21,10 @@ const CategoryCard = ({ category }) => {
     } catch (error) {
       console.error('Error deleting category:', error);
     }
+  };
+
+  const handleCardClick = () => {
+    history.push(`/category/${category?.id}`);
   };
 
   return (
@@ -43,6 +48,7 @@ const CategoryCard = ({ category }) => {
             </Tooltip>
           </Popconfirm>,
         ]}
+        onClick={handleCardClick}
       >
         <Meta title={category?.name} description={`文档数量: ${category?.documentCount}`} />
       </Card>
