@@ -15,3 +15,7 @@ For `xxx` CRUD functionality, follow the following steps to trace:
 # Referred Template Tutorial
 
 [(Faraday Academy) Fast API Crash Course Code-along | Build an app with Postgres, SQL Alchemy, Async, and more](https://www.youtube.com/watch?v=gQTRsZpR7Gw)
+
+# DL Model
+
+The DL model used in `./api/dl_models_util/multilingual-e5-large-instruct` can be found [here](https://huggingface.co/intfloat/multilingual-e5-large-instruct)
