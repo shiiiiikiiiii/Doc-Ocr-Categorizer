@@ -1,4 +1,4 @@
-# Set up & Run
+# Setup & Run
 
 ```sh
 npm install
@@ -12,10 +12,10 @@ npm run start
 
 ## Modifications from Template
 
-1. `frontend/.umirc.ts`: router definition
+1. `frontend/.umirc.ts`: Router definition
 
-2. `frontend/src/pages/`: pages
+2. `frontend/src/pages/`: Pages
 
-3. `frontend/src/components/`: components
+3. `frontend/src/components/`: Components
 
 4. `frontend/src/services/api.js`: Call API
