@@ -32,9 +32,9 @@
 
 ### 技术选择
 
-- **前端:** React框架, Antd组件库
-- **后端:** FastAPI框架
-- **关系数据库:** PgSQL
+- **前端:** React, Antd
+- **后端:** FastAPI
+- **关系数据库:** PostgreSQL
 - **存储服务:** MinIO
 - **OCR算法:** RapidOCR
 - **NLP算法:** multilingual-e5-large-instruct
