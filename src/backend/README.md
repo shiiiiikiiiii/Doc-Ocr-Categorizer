@@ -5,6 +5,7 @@
 
 2. DB
     - Setup **PostgreSQL**, SQL URL is configured in the `SQLALCHEMY_DATABASE_URL` param of `backend/db/db_setup.py`
+    - Setup [pgvector](https://github.com/pgvector/pgvector).
     - Use **Alembic** for db migration.
         ```sh
         # alembic revision --autogenerate -m "comment"
