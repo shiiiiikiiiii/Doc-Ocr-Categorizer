@@ -1,8 +1,15 @@
 # Set up
 
-- Setup `MinIO` and create bucket, bucket is configured in the `client` param of `backend/api/dl_model_util/image_processor.py`
-- Setup `PostgreSQL`, SQL URL is configured in the `SQLALCHEMY_DATABASE_URL` param of `backend/db/db_setup.py`
+1. Storage & DB
+    - Setup `MinIO` and create bucket, bucket is configured in the `client` param of `backend/api/dl_model_util/image_processor.py`
+    - Setup `PostgreSQL`, SQL URL is configured in the `SQLALCHEMY_DATABASE_URL` param of `backend/db/db_setup.py`
 
+2. Python Env & Server
+    - (Use Poetry to)Install packages in `backend/pyproject.toml`
+    - Start backend server(debug mode)
+        ```sh
+        uvicorn main:app --reload --port 8001
+        ```
 
 # Project Interpretation
 
@@ -20,10 +27,10 @@ For `xxx` CRUD functionality, follow the following steps to trace:
 3. ./api/xxx.py: router settings for `xxx`
 4. ./api/utils/xxx.py: helper functions of `xxx` that will be use by the router
 
-## Referred Template Tutorial
+## DL Model
+
+The DL model used in `./api/dl_models_util/multilingual-e5-large-instruct` can be found [in Huggingface](https://huggingface.co/intfloat/multilingual-e5-large-instruct)
+
+# Referred Template Tutorial
 
 [(Faraday Academy) Fast API Crash Course Code-along | Build an app with Postgres, SQL Alchemy, Async, and more](https://www.youtube.com/watch?v=gQTRsZpR7Gw)
-
-# DL Model
-
-The DL model used in `./api/dl_models_util/multilingual-e5-large-instruct` can be found [here](https://huggingface.co/intfloat/multilingual-e5-large-instruct)
