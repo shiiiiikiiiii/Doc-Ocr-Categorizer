@@ -22,14 +22,14 @@
 
 For `xxx` CRUD functionality, follow the following steps to trace:
 
-1. ./pydantic_schemas/xxx.py: The pydantic model defined for `xxx`
-2. ./db/models/xxx.py: orm definition of `xxx`
-3. ./api/xxx.py: router settings for `xxx`
-4. ./api/utils/xxx.py: helper functions of `xxx` that will be use by the router
+1. `backend/pydantic_schemas/xxx.py`: The pydantic model defined for `xxx`
+2. `backend/db/models/xxx.py`: orm definition of `xxx`
+3. `backend/api/xxx.py`: router settings for `xxx`
+4. `backend/api/utils/xxx.py`: helper functions of `xxx` that will be use by the router
 
 ## DL Model
 
-The DL model used in `./api/dl_models_util/multilingual-e5-large-instruct` can be found [in Huggingface](https://huggingface.co/intfloat/multilingual-e5-large-instruct)
+The DL model used in `backend/api/dl_models_util/multilingual-e5-large-instruct` can be found [in Huggingface](https://huggingface.co/intfloat/multilingual-e5-large-instruct)
 
 # Referred Template Tutorial
 

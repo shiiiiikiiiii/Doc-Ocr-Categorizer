@@ -12,8 +12,10 @@ npm run start
 
 ## Modifications from Template
 
-1. `./.umirc.ts`: router definition
+1. `frontend/.umirc.ts`: router definition
 
-2. `./src/pages`: pages
+2. `frontend/src/pages/`: pages
 
-3. `./src/components`: components
+3. `frontend/src/components/`: components
+
+4. `frontend/src/services/api.js`: Call API
