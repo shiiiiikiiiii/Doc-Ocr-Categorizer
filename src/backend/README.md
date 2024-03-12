@@ -34,9 +34,10 @@ For *xxx* CRUD functionality, follow the following steps to trace:
 3. `backend/api/xxx.py`: Router setting
 4. `backend/api/utils/xxx.py`: helper functions
 
-## DL Model
+## ML Model
 
-The DL model used in `backend/api/dl_models_util/multilingual-e5-large-instruct` can be found [in Huggingface](https://huggingface.co/intfloat/multilingual-e5-large-instruct)
+- **OCR Model**: We use [RapidOCR](https://rapidai.github.io/RapidOCRDocs/docs/quickstart/) in `backend/api/dl_models_util/image_processor.py` as OCR engine.
+- **NLP Model**: The DL model used in `backend/api/dl_models_util/text_summarizer.py` should be downloaded and put to `backend/api/dl_models_util/multilingual-e5-large-instruct/`, which can be found [in Huggingface](https://huggingface.co/intfloat/multilingual-e5-large-instruct).
 
 # Referred Template Tutorial
 
