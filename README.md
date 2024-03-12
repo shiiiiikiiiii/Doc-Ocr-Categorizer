@@ -1,4 +1,4 @@
-# DocOcrCategorizeer
+# Doc-Ocr-Categorizer
 
 > This project is currently under development.
 

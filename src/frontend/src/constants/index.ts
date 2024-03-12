@@ -1,1 +1,1 @@
-export const DEFAULT_NAME = 'Doc-Ocr-Categorizeer';
+export const DEFAULT_NAME = 'Doc-Ocr-Categorizer';

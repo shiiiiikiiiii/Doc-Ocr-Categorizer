@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "backend"
 version = "0.1.0"
-description = "FastAPI backend for DocOcrCategorizeer"
+description = "FastAPI backend for Doc-Ocr-Categorizer"
 authors = ["Junxiao Liao"]
 license = "GPL-3.0-or-later"
 readme = "README.md"
