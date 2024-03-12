@@ -5,6 +5,11 @@
 
 2. DB
     - Setup **PostgreSQL**, SQL URL is configured in the `SQLALCHEMY_DATABASE_URL` param of `backend/db/db_setup.py`
+    - Use **Alembic** for db migration.
+        ```sh
+        # alembic revision --autogenerate -m "comment"
+        alembic upgrade head
+        ```
 
 3. Python Env
     - (Use **Poetry** to)Install packages configured in `backend/pyproject.toml`
