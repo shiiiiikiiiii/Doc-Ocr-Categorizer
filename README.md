@@ -4,9 +4,7 @@
 
 ## Overview
 
-The goal of this project is to build an intelligent system, that can automatically **classify scanned documents**, using **recommendation algorithm**, **OCR** and **NLP** techniques.
-
-The system is designed for universities to efficiently manage documents of different types like transcripts, party application forms, student records etc.
+The main goal of this project is to design an automatic **document recognition and categorization** system, using **OCR** and **NLP** algorithms, combined with **recommendation algorithms**, to achieve intelligent processing of documents.
 
 ## Docs
 
