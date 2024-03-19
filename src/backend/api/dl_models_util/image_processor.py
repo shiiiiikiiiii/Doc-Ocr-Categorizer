@@ -5,7 +5,7 @@ from pydantic_schemas.pydantic_schema import Image, Document
 from sqlalchemy.orm import Session
 
 
-def process_image(file: UploadFile, db: Session) -> dict:
+def process_image(file: UploadFile, db: Session) -> Document:
     # Create MinIO client
     client = Minio(
         "localhost:6900",
@@ -60,7 +60,7 @@ import asyncio
 from concurrent.futures import ThreadPoolExecutor
 
 
-async def process_image_async(file: UploadFile, db: Session) -> dict:
+async def process_image_async(file: UploadFile, db: Session) -> Document:
     loop = asyncio.get_running_loop()
 
     # Create a thread pool executor

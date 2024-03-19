@@ -1,8 +1,12 @@
 from db.db_setup import get_db
 from fastapi import APIRouter, HTTPException, Depends, File, UploadFile, Query
 from api.dl_models_util.image_processor import process_image_async
+from api.dl_models_util.text_summarizer import generate_text_vector_async
+from api.util.document_util import find_most_related_document, update_category_id
 from pydantic_schemas.pydantic_schema import Document, Category
 from sqlalchemy.orm import Session
+
+from api.util.nlp_str import TASK, INSTRUCT
 
 
 router = APIRouter()
@@ -10,7 +14,21 @@ router = APIRouter()
 
 @router.post("/upload")
 async def upload_document(file: UploadFile = File(...), db: Session = Depends(get_db)):
+    # Process the image to create a document with nlp_result as null
     document = await process_image_async(file, db)
+    
+    # Update the nlp_result field of the document with the generated text vector
+    document_text = document.ocr_result
+    current_nlp_result = await generate_text_vector_async(TASK, INSTRUCT, document_text)
+    
+    # Update the document with the new nlp_result
+    document.nlp_result = current_nlp_result
+    db.commit()
+    
+    # Find the most related document and update the category_id if necessary
+    most_related_document = await find_most_related_document(document.id)
+    await update_category_id(db, document, most_related_document)
+    
     return document
 
 

@@ -5,6 +5,8 @@ from sqlalchemy_utils import URLType
 from db.models.utils.mixins import Timestamp
 from db.db_setup import Base
 
+from pgvector.sqlalchemy import Vector
+
 
 # Image SQLAlchemy ORM Model
 class Image(Timestamp, Base):
@@ -22,6 +24,7 @@ class Document(Timestamp, Base):
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     ocr_result = Column(JSON, nullable=False)  # Using JSON format to store OCR result
+    nlp_result = Column(Vector(dim=1024), nullable=True)  # Using pgvector's Vector type and allowing null values
     category_id = Column(Integer, ForeignKey("category.id"), nullable=False)
 
     images = relationship("Image", back_populates="document")

@@ -13,6 +13,7 @@ class Document(BaseModel):
     id: int
     name: str
     ocr_result: dict  # JSON data can be represented as a dict in Pydantic.
+    nlp_result: list = None  # Allowed to be None (i.e., accept null values)
     category_id: int
 
 

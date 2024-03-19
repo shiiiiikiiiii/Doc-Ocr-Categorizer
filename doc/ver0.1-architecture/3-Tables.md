@@ -15,6 +15,7 @@
   - `id` - 文档唯一标识符
   - `name` - 文档名称
   - `ocr_result` - PgSQL的JSON类型，存储OCR模型提取的key-value形式的结果
+  - `nlp_result` - pgvector插件的vector类型, 存储NLP模型做embedding的结果
   - `category_id` - 文档分类作为外键关联到category表
 
 1. **category表：**
