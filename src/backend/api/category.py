@@ -10,7 +10,7 @@ router = APIRouter()
 
 @router.get("/categories", response_model=list[PyCategory])
 async def get_categories(db: Session = Depends(get_db)):
-    categories = await db.query(PyCategory).all()
+    categories = db.query(DbCategory).all()
     return categories
 
 
@@ -28,7 +28,7 @@ async def create_category(category: PyCategory, db: Session = Depends(get_db)):
 
 @router.patch("/categories/{id}")
 async def update_category(id: int, updated_data: dict, db: Session = Depends(get_db)):
-    category = await db.query(DbCategory).filter(DbCategory.id == id).first()
+    category = db.query(DbCategory).filter(DbCategory.id == id).first()
     if category is None:
         raise HTTPException(status_code=404, detail="Category not found")
 
@@ -41,7 +41,7 @@ async def update_category(id: int, updated_data: dict, db: Session = Depends(get
 
 @router.delete("/categories/{id}", status_code=204)
 async def delete_category(id: int, db: Session = Depends(get_db)):
-    result = await db.query(DbCategory).filter(DbCategory.id == id).delete()
+    result = db.query(DbCategory).filter(DbCategory.id == id).delete()
     if result == 0:
         raise HTTPException(status_code=404, detail="Category not found")
     db.commit()
@@ -50,5 +50,5 @@ async def delete_category(id: int, db: Session = Depends(get_db)):
 
 @router.get("/categories/{category_id}/documents", response_model=list[PyDocument])
 async def get_documents_by_category(category_id: int, db: Session = Depends(get_db)):
-    documents = await db.query(DbDocument).filter(DbDocument.category_id == category_id).all()
+    documents = db.query(DbDocument).filter(DbDocument.category_id == category_id).all()
     return documents
