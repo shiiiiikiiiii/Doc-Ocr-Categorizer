@@ -9,7 +9,7 @@ from pgvector.sqlalchemy import Vector
 
 
 # Image SQLAlchemy ORM Model
-class Image(Timestamp, Base):
+class DbImage(Timestamp, Base):
     __tablename__ = "image"
     id = Column(Integer, primary_key=True)
     file_key = Column(URLType, nullable=False)
@@ -19,7 +19,7 @@ class Image(Timestamp, Base):
 
 
 # Document SQLAlchemy ORM Model
-class Document(Timestamp, Base):
+class DbDocument(Timestamp, Base):
     __tablename__ = "document"
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
@@ -32,7 +32,7 @@ class Document(Timestamp, Base):
 
 
 # Category SQLAlchemy ORM Model
-class Category(Timestamp, Base):
+class DbCategory(Timestamp, Base):
     __tablename__ = "category"
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)

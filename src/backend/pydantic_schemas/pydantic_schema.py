@@ -2,14 +2,14 @@ from pydantic import BaseModel
 
 
 # Image Pydantic Model
-class Image(BaseModel):
+class PyImage(BaseModel):
     id: int
     file_key: str
     document_id: int
 
 
 # Document Pydantic Model
-class Document(BaseModel):
+class PyDocument(BaseModel):
     id: int
     name: str
     ocr_result: dict  # JSON data can be represented as a dict in Pydantic.
@@ -18,7 +18,7 @@ class Document(BaseModel):
 
 
 # Category Pydantic Model
-class Category(BaseModel):
+class PyCategory(BaseModel):
     id: int
     name: str
     description: str
