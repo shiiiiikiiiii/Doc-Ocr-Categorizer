@@ -38,8 +38,8 @@
 
 For *xxx* CRUD functionality, follow the following steps to trace:
 
-1. `backend/pydantic_schemas/xxx.py`: Pydantic model
-2. `backend/db/models/xxx.py`: ORM definition
+1. `backend/pydantic_schemas/pydantic_schema.py`: Pydantic model
+2. `backend/db/models/db_model.py`: ORM definition
 3. `backend/api/xxx.py`: Router setting
 4. `backend/api/*util*/`: helper functions
 
