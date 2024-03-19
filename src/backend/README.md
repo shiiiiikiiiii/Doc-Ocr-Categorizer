@@ -18,7 +18,10 @@
         poetry install
         ```
 
-4. Run Server
+4. Download e5 Model
+    - The NLP model should be downloaded and put to `backend/api/dl_models_util/multilingual-e5-large-instruct/`, which can be found [in Huggingface](https://huggingface.co/intfloat/multilingual-e5-large-instruct).
+
+5. Run Server
     - Start backend server(debug mode)
         ```sh
         uvicorn main:app --reload --port 8001
@@ -43,7 +46,7 @@ For *xxx* CRUD functionality, follow the following steps to trace:
 ## ML Model
 
 - **OCR Model**: We use [RapidOCR](https://rapidai.github.io/RapidOCRDocs/docs/quickstart/) in `backend/api/dl_models_util/image_processor.py` as OCR engine.
-- **NLP Model**: The DL model used in `backend/api/dl_models_util/text_summarizer.py` should be downloaded and put to `backend/api/dl_models_util/multilingual-e5-large-instruct/`, which can be found [in Huggingface](https://huggingface.co/intfloat/multilingual-e5-large-instruct).
+- **NLP Model**: The DL model *(intfloat/multilingual-e5-large-instruct)* is used in `backend/api/dl_models_util/text_summarizer.py`.
 
 # Referred Template Tutorial
 
