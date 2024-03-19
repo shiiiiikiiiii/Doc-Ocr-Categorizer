@@ -1,5 +1,4 @@
 from sqlalchemy.orm import Session
-from pydantic_schemas.pydantic_schema import PyDocument
 from db.models.db_model import DbDocument
 from typing import Optional
 
@@ -30,7 +29,7 @@ def find_most_related_document( document_id: int, conn = Depends(get_psycopg2_co
 
 
 # Helper function to update the document's category_id based on the most related document
-async def update_category_id(db: Session, document: PyDocument, most_related_document: Optional[DbDocument]):
+async def update_category_id(db: Session, document: DbDocument, most_related_document: Optional[DbDocument]):
     if most_related_document and most_related_document.category_id != document.category_id:
         document.category_id = most_related_document.category_id
         db.commit()

@@ -15,7 +15,7 @@ class DbImage(Timestamp, Base):
     file_key = Column(URLType, nullable=False)
     document_id = Column(Integer, ForeignKey("document.id"), nullable=False)
 
-    document = relationship("Document", back_populates="images")
+    document = relationship("DbDocument", back_populates="images")
 
 
 # Document SQLAlchemy ORM Model
@@ -27,8 +27,8 @@ class DbDocument(Timestamp, Base):
     nlp_result = Column(Vector(dim=1024), nullable=True)  # Using pgvector's Vector type and allowing null values
     category_id = Column(Integer, ForeignKey("category.id"), nullable=False)
 
-    images = relationship("Image", back_populates="document")
-    category = relationship("Category", back_populates="documents")
+    images = relationship("DbImage", back_populates="document")
+    category = relationship("DbCategory", back_populates="documents")
 
 
 # Category SQLAlchemy ORM Model
@@ -38,4 +38,4 @@ class DbCategory(Timestamp, Base):
     name = Column(String, nullable=False)
     description = Column(String, nullable=True)
 
-    documents = relationship("Document", back_populates="category")
+    documents = relationship("DbDocument", back_populates="category")

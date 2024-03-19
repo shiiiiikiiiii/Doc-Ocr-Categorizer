@@ -1,9 +1,10 @@
 from db.db_setup import get_db
-from fastapi import APIRouter, HTTPException, Depends, File, UploadFile, Query
+from fastapi import APIRouter, HTTPException, UploadFile, Depends, File, Query
 from api.dl_models_util.image_processor import process_image_async
 from api.dl_models_util.text_summarizer import generate_text_vector_async
 from api.util.document_util import find_most_related_document, update_category_id
-from pydantic_schemas.pydantic_schema import PyDocument, PyCategory
+from pydantic_schemas.pydantic_schema import PyDocument
+from db.models.db_model import DbDocument, DbCategory
 from sqlalchemy.orm import Session
 
 from api.util.nlp_str import TASK, INSTRUCT
@@ -23,10 +24,13 @@ async def upload_document(file: UploadFile = File(...), db: Session = Depends(ge
     
     # Update the document with the new nlp_result
     document.nlp_result = current_nlp_result
+    # Merge the updated document with the database to ensure the changes are tracked
+    db.merge(document)
+    # Commit the changes to the database
     db.commit()
     
     # Find the most related document and update the category_id if necessary
-    most_related_document = await find_most_related_document(document.id)
+    most_related_document: DbDocument = await find_most_related_document(document.id)
     await update_category_id(db, document, most_related_document)
     
     return document
@@ -34,7 +38,7 @@ async def upload_document(file: UploadFile = File(...), db: Session = Depends(ge
 
 @router.get("/documents", response_model=list[PyDocument])
 async def get_documents(db: Session = Depends(get_db)):
-    documents = db.query(PyDocument).all()
+    documents = db.query(DbDocument).all()
     if documents is None:
         raise HTTPException(status_code=404, detail="Documents are empty")
     return documents
@@ -42,7 +46,7 @@ async def get_documents(db: Session = Depends(get_db)):
 
 @router.get("/documents/{id}")
 async def get_document(id: int, db: Session = Depends(get_db)):
-    document = db.query(PyDocument).filter(PyDocument.id == id).first()
+    document = db.query(DbDocument).filter(DbDocument.id == id).first()
     if document is None:
         raise HTTPException(status_code=404, detail="Document not found")
     return document
@@ -50,16 +54,16 @@ async def get_document(id: int, db: Session = Depends(get_db)):
 
 @router.get("/documents/search", response_model=list[PyDocument])
 async def search_documents(name: str = Query(None), db: Session = Depends(get_db)):
-    query = db.query(PyDocument)
+    query = db.query(DbDocument)
     if name:
-        query = query.filter(PyDocument.name.contains(name))
+        query = query.filter(DbDocument.name.contains(name))
     documents = query.all()
     return documents
 
 
 @router.delete("/documents/{id}", status_code=204)
 async def delete_document(id: int, db: Session = Depends(get_db)):
-    result = db.query(PyDocument).filter(PyDocument.id == id).delete()
+    result = db.query(DbDocument).filter(DbDocument.id == id).delete()
     if result == 0:
         raise HTTPException(status_code=404, detail="Document not found")
     db.commit()
@@ -69,11 +73,11 @@ async def delete_document(id: int, db: Session = Depends(get_db)):
 async def update_document_category(
     document_id: int, category_id: int, db: Session = Depends(get_db)
 ):
-    document = db.query(PyDocument).filter(PyDocument.id == document_id).first()
+    document = db.query(DbDocument).filter(DbDocument.id == document_id).first()
     if document is None:
         raise HTTPException(status_code=404, detail="Document not found")
 
-    category = db.query(PyCategory).filter(PyCategory.id == category_id).first()
+    category = db.query(DbCategory).filter(DbCategory.id == category_id).first()
     if category is None:
         raise HTTPException(status_code=404, detail="Category not found")
 

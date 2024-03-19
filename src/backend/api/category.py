@@ -1,6 +1,7 @@
 from db.db_setup import get_db
 from fastapi import APIRouter, HTTPException, Depends
 from pydantic_schemas.pydantic_schema import PyDocument, PyCategory
+from db.models.db_model import DbCategory, DbDocument
 from sqlalchemy.orm import Session
 
 
@@ -9,13 +10,16 @@ router = APIRouter()
 
 @router.get("/categories", response_model=list[PyCategory])
 async def get_categories(db: Session = Depends(get_db)):
-    categories = db.query(PyCategory).all()
+    categories = await db.query(PyCategory).all()
     return categories
 
 
 @router.post("/categories", response_model=PyCategory)
 async def create_category(category: PyCategory, db: Session = Depends(get_db)):
-    new_category = PyCategory(**category.dict())
+    new_category = DbCategory(
+        name = category.name,
+        description = category.description
+    )
     db.add(new_category)
     db.commit()
     db.refresh(new_category)
@@ -24,7 +28,7 @@ async def create_category(category: PyCategory, db: Session = Depends(get_db)):
 
 @router.patch("/categories/{id}")
 async def update_category(id: int, updated_data: dict, db: Session = Depends(get_db)):
-    category = db.query(PyCategory).filter(PyCategory.id == id).first()
+    category = await db.query(DbCategory).filter(DbCategory.id == id).first()
     if category is None:
         raise HTTPException(status_code=404, detail="Category not found")
 
@@ -37,13 +41,14 @@ async def update_category(id: int, updated_data: dict, db: Session = Depends(get
 
 @router.delete("/categories/{id}", status_code=204)
 async def delete_category(id: int, db: Session = Depends(get_db)):
-    result = db.query(PyCategory).filter(PyCategory.id == id).delete()
+    result = await db.query(DbCategory).filter(DbCategory.id == id).delete()
     if result == 0:
         raise HTTPException(status_code=404, detail="Category not found")
     db.commit()
+    return {"message": "Category deleted successfully"}
 
 
 @router.get("/categories/{category_id}/documents", response_model=list[PyDocument])
 async def get_documents_by_category(category_id: int, db: Session = Depends(get_db)):
-    documents = db.query(PyDocument).filter(PyDocument.category_id == category_id).all()
+    documents = await db.query(DbDocument).filter(DbDocument.category_id == category_id).all()
     return documents

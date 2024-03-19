@@ -1,11 +1,11 @@
 from fastapi import UploadFile
 from minio import Minio
 from rapidocr_onnxruntime import RapidOCR
-from pydantic_schemas.pydantic_schema import PyImage, PyDocument
+from db.models.db_model import DbImage, DbDocument
 from sqlalchemy.orm import Session
 
 
-def process_image(file: UploadFile, db: Session) -> PyDocument:
+def process_image(file: UploadFile, db: Session) -> DbDocument:
     # Create MinIO client
     client = Minio(
         "localhost:6900",
@@ -34,16 +34,16 @@ def process_image(file: UploadFile, db: Session) -> PyDocument:
     ]
 
     # Save image information to the db image table
-    new_image = PyImage(file_key=image_url)
+    new_image = DbImage(file_key=image_url)
     db.add(new_image)
     db.commit()
-    db.refresh(new_image)
+    db.refresh(new_image) # Load the related information of new_image, like id
 
     # Default category ID
-    default_category_id: int = -1
+    default_category_id: int = 1
 
     # Create a new Document object and store the OCR results as JSON in it
-    new_document = PyDocument(
+    new_document = DbDocument(
         name=file.filename,
         ocr_result=ocr_result,
         category_id=default_category_id,
@@ -60,7 +60,7 @@ import asyncio
 from concurrent.futures import ThreadPoolExecutor
 
 
-async def process_image_async(file: UploadFile, db: Session) -> PyDocument:
+async def process_image_async(file: UploadFile, db: Session) -> DbDocument:
     loop = asyncio.get_running_loop()
 
     # Create a thread pool executor
