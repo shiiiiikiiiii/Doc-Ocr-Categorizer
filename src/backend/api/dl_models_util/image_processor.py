@@ -4,56 +4,61 @@ from rapidocr_onnxruntime import RapidOCR
 from db.models.db_model import DbImage, DbDocument
 from sqlalchemy.orm import Session
 
+import io
 
-def process_image(file: UploadFile, db: Session) -> DbDocument:
-    # Create MinIO client
-    client = Minio(
-        "localhost:6900",
-        access_key="admin",
-        secret_key="password",
-        secure=False,
-    )
+def process_image(input_file: UploadFile, db: Session) -> DbDocument:
+    try:
+        # Create MinIO client
+        client = Minio(
+            "localhost:6900",
+            access_key="admin",
+            secret_key="password",
+            secure=False,
+        )
 
-    # Upload image to MinIO and get URL
-    file_contents = file.file.read()
-    object_name = f"{file.filename}"
-    client.put_object(
-        "image-bucket", object_name, file_contents, length=len(file_contents)
-    )
-    image_url = client.presigned_get_object("image-bucket", object_name)
+        # Upload image to MinIO and get URL
+        object_name = f"{input_file.filename}"
+        file_bytes = input_file.file.read()  # Read the entire file into memory
+        client.put_object(
+            "image-bucket", object_name, io.BytesIO(file_bytes), length=len(file_bytes)
+        )
+        image_url = client.presigned_get_object("image-bucket", object_name)
 
-    # OCR recognition using RapidOCR
-    engine = RapidOCR()
-    with open(file.file.name, "rb") as img_file:
-        result = engine(img_file)
+        # OCR recognition using RapidOCR
+        engine = RapidOCR()
+        result, elapse = engine(file_bytes)
 
-    # Extract the OCR result and convert it to JSON format
-    ocr_result = [
-        {"coordinates": box, "text": text, "confidence": confidence}
-        for box, text, confidence in result
-    ]
+        # Extract the OCR result and convert it to JSON format
+        ocr_result = [
+            {"text": text,}
+            for box, text, confidence in result
+        ]
 
-    # Save image information to the db image table
-    new_image = DbImage(file_key=image_url)
-    db.add(new_image)
-    db.commit()
-    db.refresh(new_image) # Load the related information of new_image, like id
+        # Default category ID
+        default_category_id: int = 1
 
-    # Default category ID
-    default_category_id: int = 1
+        # Create a new Document object and store the OCR results as JSON in it
+        new_document = DbDocument(
+            name=input_file.filename,
+            ocr_result=ocr_result,
+            category_id=default_category_id,
+        )
+        db.add(new_document)
+        db.commit()
+        db.refresh(new_document)
 
-    # Create a new Document object and store the OCR results as JSON in it
-    new_document = DbDocument(
-        name=file.filename,
-        ocr_result=ocr_result,
-        category_id=default_category_id,
-        image_id=new_image.id,
-    )
-    db.add(new_document)
-    db.commit()
-    db.refresh(new_document)
+        # Save image information to the db image table
+        new_image = DbImage(file_key=image_url, document_id=new_document.id)
+        db.add(new_image)
+        db.commit()
+        db.refresh(new_image)  # Load the related information of new_image, like id
 
-    return new_document
+        return new_document
+
+    except Exception as e:
+        # Handle any exceptions that may occur
+        print(f"Error occurred: {e}")
+        raise e
 
 
 import asyncio

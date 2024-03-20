@@ -14,13 +14,13 @@ router = APIRouter()
 
 
 @router.post("/upload")
-async def upload_document(file: UploadFile = File(...), db: Session = Depends(get_db)):
+async def upload_document(file: UploadFile = File(...), db: Session = Depends(get_db), response_model=PyDocument):
     # Process the image to create a document with nlp_result as null
     document = await process_image_async(file, db)
     
     # Update the nlp_result field of the document with the generated text vector
     document_text = document.ocr_result
-    current_nlp_result = await generate_text_vector_async(TASK, INSTRUCT, document_text)
+    current_nlp_result = await generate_text_vector_async(TASK, INSTRUCT, str(document_text))
     
     # Update the document with the new nlp_result
     document.nlp_result = current_nlp_result
@@ -30,8 +30,8 @@ async def upload_document(file: UploadFile = File(...), db: Session = Depends(ge
     db.commit()
     
     # Find the most related document and update the category_id if necessary
-    most_related_document: DbDocument = await find_most_related_document(document.id)
-    await update_category_id(db, document, most_related_document)
+    most_related_category_id: DbDocument = find_most_related_document(document.id)
+    document = await update_category_id(db, document, most_related_category_id)
     
     return document
 

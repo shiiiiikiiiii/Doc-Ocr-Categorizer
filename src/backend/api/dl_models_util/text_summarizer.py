@@ -55,8 +55,9 @@ async def generate_text_vector_async(task: str, instruct: str, document: str) ->
 
     # Run sync function in thread pool
     vector = await loop.run_in_executor(executor, sync_generate_text_vector, task, instruct, document, shared_resources)
+    combined_embedding = (vector[0] + vector[1]) / 2
 
-    return vector
+    return combined_embedding
 
 if __name__ == "__main__":
     # example
@@ -66,6 +67,8 @@ if __name__ == "__main__":
 
     async def main():
         vector = await generate_text_vector_async(task, instruct, document)
+        print(f"length of vector is {len(vector)}")
+        print(f"lenth of elements of vector are {len(vector[0])}\n{len(vector[1])}")
         print(vector)
 
     asyncio.run(main())
