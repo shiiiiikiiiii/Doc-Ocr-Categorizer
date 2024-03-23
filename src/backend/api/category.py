@@ -2,6 +2,7 @@ from db.db_setup import get_db
 from fastapi import APIRouter, HTTPException, Depends
 from pydantic_schemas.pydantic_schema import PyDocument, PyCategory
 from db.models.db_model import DbCategory, DbDocument
+from api.util.document_return_util import multiple_documents_return
 from sqlalchemy.orm import Session
 
 
@@ -48,7 +49,7 @@ async def delete_category(id: int, db: Session = Depends(get_db)):
     return {"message": "Category deleted successfully"}
 
 
-@router.get("/categories/{category_id}/documents", response_model=list[PyDocument])
+@router.get("/categories/{category_id}/documents")
 async def get_documents_by_category(category_id: int, db: Session = Depends(get_db)):
     documents = db.query(DbDocument).filter(DbDocument.category_id == category_id).all()
-    return documents
+    return multiple_documents_return(documents)

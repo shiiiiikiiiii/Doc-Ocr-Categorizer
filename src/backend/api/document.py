@@ -1,9 +1,9 @@
 from db.db_setup import get_db
-from fastapi import APIRouter, HTTPException, UploadFile, Depends, File, Query
+from fastapi import APIRouter, HTTPException, UploadFile, Depends, File
 from api.dl_models_util.image_processor import process_image_async
 from api.dl_models_util.text_summarizer import generate_text_vector_async
-from api.util.document_util import find_most_related_document, update_category_id
-from pydantic_schemas.pydantic_schema import PyDocument
+from api.util.document_pg_util import find_most_related_document, update_category_id
+from api.util.document_return_util import single_document_return, multiple_documents_return
 from db.models.db_model import DbDocument, DbCategory
 from sqlalchemy.orm import Session
 
@@ -14,7 +14,7 @@ router = APIRouter()
 
 
 @router.post("/upload")
-async def upload_document(file: UploadFile = File(...), db: Session = Depends(get_db), response_model=PyDocument):
+async def upload_document(file: UploadFile = File(...), db: Session = Depends(get_db)):
     # Process the image to create a document with nlp_result as null
     document = await process_image_async(file, db)
     
@@ -33,15 +33,15 @@ async def upload_document(file: UploadFile = File(...), db: Session = Depends(ge
     most_related_category_id: DbDocument = find_most_related_document(document.id)
     document = await update_category_id(db, document, most_related_category_id)
     
-    return document
+    return single_document_return(document)
 
 
-@router.get("/documents", response_model=list[PyDocument])
+@router.get("/documents")
 async def get_documents(db: Session = Depends(get_db)):
     documents = db.query(DbDocument).all()
     if documents is None:
         raise HTTPException(status_code=404, detail="Documents are empty")
-    return documents
+    return multiple_documents_return(documents)
 
 
 @router.get("/documents/{id}")
@@ -49,16 +49,16 @@ async def get_document(id: int, db: Session = Depends(get_db)):
     document = db.query(DbDocument).filter(DbDocument.id == id).first()
     if document is None:
         raise HTTPException(status_code=404, detail="Document not found")
-    return document
+    return single_document_return(document)
 
 
-@router.get("/documents/search", response_model=list[PyDocument])
-async def search_documents(name: str = Query(None), db: Session = Depends(get_db)):
+@router.get("/documents/search/{search_name}")
+async def search_documents(search_name: str, db: Session = Depends(get_db)):
     query = db.query(DbDocument)
-    if name:
-        query = query.filter(DbDocument.name.contains(name))
+    if search_name:
+        query = query.filter(DbDocument.name.contains(search_name))
     documents = query.all()
-    return documents
+    return multiple_documents_return(documents)
 
 
 @router.delete("/documents/{id}", status_code=204)
@@ -67,9 +67,10 @@ async def delete_document(id: int, db: Session = Depends(get_db)):
     if result == 0:
         raise HTTPException(status_code=404, detail="Document not found")
     db.commit()
+    return {"message": "Document deleted successfully"}
 
 
-@router.post("/documents/{document_id}/category")
+@router.patch("/documents/{document_id}/category")
 async def update_document_category(
     document_id: int, category_id: int, db: Session = Depends(get_db)
 ):

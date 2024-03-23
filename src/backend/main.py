@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from api import document, category
+from api import document, category, image
 from db.db_setup import engine, Base
 
 from fastapi.middleware.cors import CORSMiddleware
@@ -21,4 +21,5 @@ app.add_middleware(
 )
 
 app.include_router(document.router)
+app.include_router(image.router)
 app.include_router(category.router)

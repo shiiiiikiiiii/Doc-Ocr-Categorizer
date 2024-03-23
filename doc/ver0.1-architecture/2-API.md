@@ -16,7 +16,7 @@
 
 4. **根据名称检索文档：**
    
-   - `GET /documents/search?name={name}` - 根据名称检索文档。
+   - `GET /documents/search/{search_name}` - 根据名称检索文档。
 
 5. **删除文档：**
    
@@ -24,7 +24,13 @@
 
 6. **修改文档所属分类：**
    
-   - `POST /documents/{id}/category` - 手动修改特定文档所属的类别。
+   - `PATCH /documents/{id}/category` - 手动修改特定文档所属的类别。
+
+### 图片相关API
+
+1. **根据文档ID获取图片URL：**
+
+   - `GET /images/{document_id}` - 根据文档ID获取对应图片URL。
 
 ### 文档分类相关API
 
