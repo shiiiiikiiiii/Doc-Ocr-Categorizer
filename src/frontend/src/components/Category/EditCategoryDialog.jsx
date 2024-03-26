@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Form, Input } from 'antd';
-import { updateCategory } from '@/services/api';
+import { update_category } from '@/services/api';
 
 const EditCategoryDialog = ({ visible, category, onCancel, onEdit }) => {
   const [form] = Form.useForm();
@@ -10,7 +10,7 @@ const EditCategoryDialog = ({ visible, category, onCancel, onEdit }) => {
     setConfirmLoading(true);
     try {
       const values = await form.validateFields();
-      const updatedCategory = await updateCategory(category?.id, values);
+      const updatedCategory = await update_category(category?.id, values);
       onEdit(updatedCategory);
     } catch (error) {
       console.error('Error updating category:', error);
@@ -21,7 +21,7 @@ const EditCategoryDialog = ({ visible, category, onCancel, onEdit }) => {
 
   return (
     <Modal
-      visible={visible}
+      open={visible}
       title="编辑分类"
       okText="保存"
       cancelText="取消"

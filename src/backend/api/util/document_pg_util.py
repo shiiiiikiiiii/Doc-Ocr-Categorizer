@@ -28,7 +28,6 @@ class Psycopg2ConnectionManager:
 
 from sqlalchemy.orm import Session
 from db.models.db_model import DbDocument
-from typing import Optional
 
 
 def find_most_related_document( document_id: int ):

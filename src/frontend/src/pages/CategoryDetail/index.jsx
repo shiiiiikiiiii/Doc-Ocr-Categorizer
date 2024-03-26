@@ -3,7 +3,7 @@ import { useParams } from 'umi';
 import { Row, Col, Spin } from 'antd';
 import DocumentDetailsModal from '@/components/Document/DocumentDetailsModal';
 import DocumentThumbnail from '@/pages/CategoryDetail/util/DocumentThumbnail';
-import { getDocumentsByCategory } from '@/services/api';
+import { get_documents_by_category } from '@/services/api';
 
 const CategoryDetails = () => {
   const { categoryId } = useParams();
@@ -18,7 +18,7 @@ const CategoryDetails = () => {
   const fetchDocuments = async () => {
     setLoading(true);
     try {
-      const data = await getDocumentsByCategory(categoryId);
+      const data = await get_documents_by_category(categoryId);
       setDocuments(data);
     } catch (error) {
       console.error('Error fetching documents:', error);

@@ -7,7 +7,7 @@ export default defineConfig({
   initialState: {},
   request: {},
   layout: {
-    title: 'Doc-Ocr-Categotizeer',
+    title: 'Doc-Ocr-Categotizer',
   },
   routes: [
     {

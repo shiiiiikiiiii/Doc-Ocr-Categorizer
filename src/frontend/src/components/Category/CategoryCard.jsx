@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Card, Tooltip, Popconfirm } from 'antd';
+import { useNavigate } from "react-router-dom";
+import { Card, Button, Popconfirm } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import EditCategoryDialog from '@/components/Category/EditCategoryDialog';
-import { deleteCategory } from '@/services/api';
+import { delete_category } from '@/services/api';
 
 const { Meta } = Card;
 
 const CategoryCard = ({ category }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [showEditDialog, setShowEditDialog] = useState(false);
 
   const handleEdit = () => {
@@ -16,7 +17,7 @@ const CategoryCard = ({ category }) => {
 
   const handleDelete = async () => {
     try {
-      await deleteCategory(category?.id);
+      await delete_category(category?.id);
       // Refresh category list after successful deletion
     } catch (error) {
       console.error('Error deleting category:', error);
@@ -24,7 +25,7 @@ const CategoryCard = ({ category }) => {
   };
 
   const handleCardClick = () => {
-    history.push(`/category/${category?.id}`);
+    // navigate(`/category/${category?.id}`);
   };
 
   return (
@@ -32,28 +33,27 @@ const CategoryCard = ({ category }) => {
       <Card
         hoverable
         style={{ width: 240, marginRight: 16, marginBottom: 16 }}
-        cover={<img alt={category?.name} src={category?.icon} />}
         actions={[
-          <Tooltip title="编辑">
-            <EditOutlined key="edit" onClick={handleEdit} />
-          </Tooltip>,
+          <Button type="text" key="edit" onClick={handleEdit}>
+            <EditOutlined /> 编辑
+          </Button>,
           <Popconfirm
             title="确定删除此分类吗?"
             onConfirm={handleDelete}
             okText="确定"
             cancelText="取消"
           >
-            <Tooltip title="删除">
-              <DeleteOutlined key="delete" />
-            </Tooltip>
-          </Popconfirm>,
+            <Button type="text" danger key="delete">
+              <DeleteOutlined /> 删除
+            </Button>
+          </Popconfirm>
         ]}
         onClick={handleCardClick}
       >
-        <Meta title={category?.name} description={`文档数量: ${category?.documentCount}`} />
+        <Meta title={category?.name} />
       </Card>
       <EditCategoryDialog
-        visible={showEditDialog}
+        open={showEditDialog}
         category={category}
         onCancel={() => setShowEditDialog(false)}
         onEdit={(updatedCategory) => {

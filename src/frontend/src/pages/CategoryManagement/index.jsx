@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button, Spin } from 'antd';
+import { Button, Spin } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import CategoryCard from '@/components/Category/CategoryCard'
 import AddCategoryDialog from '@/components/Category/AddCategoryDialog';
-import { getCategories } from '@/services/api';
+import { get_all_categories } from '@/services/api';
 
 const CategoryManagement = () => {
   const [categories, setCategories] = useState([]);
@@ -17,7 +17,7 @@ const CategoryManagement = () => {
   const fetchCategories = async () => {
     setLoading(true);
     try {
-      const data = await getCategories();
+      const data = await get_all_categories();
       setCategories(data);
     } catch (error) {
       console.error('Error fetching categories:', error);
@@ -26,10 +26,6 @@ const CategoryManagement = () => {
     }
   };
 
-  const handleAddCategory = (newCategory) => {
-    setCategories([...categories, newCategory]);
-    setShowAddDialog(false);
-  };
 
   return (
     <div>
@@ -53,7 +49,9 @@ const CategoryManagement = () => {
       <AddCategoryDialog
         visible={showAddDialog}
         onCancel={() => setShowAddDialog(false)}
-        onAdd={handleAddCategory}
+        onAdd={() => {
+          setShowAddDialog(false);
+        }}
       />
     </div>
   );

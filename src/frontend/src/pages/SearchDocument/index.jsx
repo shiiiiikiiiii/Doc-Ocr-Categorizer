@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Input, List, Spin } from 'antd';
 import DocumentItem from '@/components/Document/DocumentItem';
-import { searchDocuments } from '@/services/api';
+import { search_documents_by_name } from '@/services/api';
 
 const SearchDocument = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -19,7 +19,7 @@ const SearchDocument = () => {
   const fetchDocuments = async () => {
     setLoading(true);
     try {
-      const data = await searchDocuments(searchTerm);
+      const data = await search_documents_by_name(searchTerm);
       setDocuments(data);
     } catch (error) {
       console.error('Error fetching documents:', error);

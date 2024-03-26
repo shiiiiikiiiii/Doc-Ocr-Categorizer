@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Upload, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import UploadResultModal from '@/components/Document/UploadResultModal';
-import { uploadDocument } from '@/services/api';
+import { upload_document_image } from '@/services/api';
 
 const UploadDocument = () => {
   const [uploadResult, setUploadResult] = useState(null);
 
   const handleUpload = async (file) => {
     try {
-      const result = await uploadDocument(file);
+      const result = await upload_document_image(file);
       setUploadResult(result);
     } catch (error) {
       console.error('Error uploading document:', error);

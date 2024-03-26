@@ -1,6 +1,10 @@
 ## 前端页面设计
 
-1. **文档分类管理页面（Category Management Page）**
+1. **首页**
+
+  - 显示欢迎词
+
+2. **文档分类管理页面（Category Management Page）**
 
   - 页面布局：采用卡片式布局，每个卡片展示一个文档分类，包括分类名称、图标、文档数量等信息。
   - 交互设计：用户点击分类卡片，页面平滑过渡到对应的文档分类详情页面。
@@ -10,22 +14,22 @@
     - 编辑按钮: 点击后弹出 _dialog_, 可以输入名称
     - 删除按钮: 点击后弹出 _dialog_, 其中包含确定和取消按钮
 
-2. **文档分类详情页面（Category Details Page）**
+3. **文档分类详情页面（Category Details Page）**
 
   - 页面布局：以网格形式展示该分类下的所有文档，每个文档以缩略图和简短描述的形式呈现。
   - 交互设计：用户点击文档缩略图，弹出对应的 _文档详细模态对话框_。
 
-3. **上传文档页面（Upload Document Page）**
+4. **上传文档页面（Upload Document Page）**
 
   - 页面布局：提供一个清晰的文件上传表单，用户可以上传文档。
   - 交互设计：上传后，系统自动进行OCR处理，并在页面上弹出 _dialog_ 展示处理结果和自动分类结果。
 
-4. **搜索文档页面（Search Document Page）**
+5. **搜索文档页面（Search Document Page）**
 
   - 页面布局：顶部提供一个搜索框，用户可以输入关键词进行搜索。
   - 交互设计：搜索结果以列表形式展示，每个结果旁边有"查看详情"按钮。点击后，弹出对应的 _文档详细模态对话框_。
 
-5. **文档详情模态对话框（Document Details Modal dialog）**
+6. **文档详情模态对话框（Document Details Modal dialog）**
 
   - 对话框内容：展示文档的图片预览、OCR识别结果、分类信息、上传日期等元数据。
   - 操作选项：提供下载文档、修改分类、改名、删除文档的操作按钮，以及关闭对话框的选项。
@@ -33,65 +37,14 @@
     - 编辑按钮: 点击后弹出 _dialog_, 可以输入名称
     - 删除按钮: 点击后弹出 _dialog_, 其中包含确定和取消按钮
 
-6. **导航栏（Navigation Bar）**
+7. **导航栏（Navigation Bar）**
 
   - 设计：导航栏固定在页面的左侧，垂直布局。
   - 内容：包含以下按钮：
+
+    - 首页：跳转到首页。 
     - 文档分类管理：跳转到文档分类管理页面。
     - 上传文档：跳转到上传文档页面。
     - 搜索文档：跳转到搜索文档页面。
+
   - 通过配置`frontend/.umirc.ts`中的`routes`参数来实现
-
-## 前端项目架构
-
-- **文件结构**：
-
-```text
-.
-├── mock
-│   └── services // 存放API mock数据
-├── src
-│   ├── .umi(umijs相关配置)
-│   ├── layouts
-│   │   ├── BasicLayout.tsx // 主布局组件
-│   │   ├── index.less // 主布局样式
-│   ├── models
-│   │   ├── global.ts // 全局状态管理
-│   │   └── index.ts
-│   ├── pages
-│   │   ├── CategoryManagement // 文档分类管理页面
-│   │   │   ├── index.tsx
-│   │   │   ├── styles.less
-│   │   │   └── ... (其他分类管理相关组件)
-│   │   ├── UploadDocument // 上传文档页面
-│   │   │   ├── index.tsx
-│   │   │   ├── styles.less
-│   │   │   └── ... (其他上传文档相关组件)
-│   │   ├── SearchDocument // 搜索文档页面
-│   │   │   ├── index.tsx
-│   │   │   ├── styles.less
-│   │   │   └── ... (其他搜索文档相关组件)
-│   │   ├── Home // 首页
-│   │   │   ├── index.tsx
-│   │   │   ├── styles.less
-│   │   │   └── ... (其他首页相关组件)
-│   ├── components // 通用组件库
-│   │   ├── Card.tsx // 文档分类卡片
-│   │   ├── Dialog.tsx // 对话框组件
-│   │   ├── DocumentDetailsModal.tsx // 文档详情模态对话框
-│   │   └── ... (其他通用组件)
-│   ├── utils
-│   │   └── index.ts // 工具函数
-│   ├── services
-│   │   └── api.ts // API请求封装
-│   ├── app.tsx // 应用入口文件
-│   ├── global.less // 全局样式
-│   ├── global.ts // 全局配置
-│   ├── loading.tsx // 页面加载组件
-│   └── ... (其他必要的文件和目录)
-├── .env
-├── .umirc.ts
-├── package.json
-├── tsconfig.json
-└── typings.d.ts
-```
