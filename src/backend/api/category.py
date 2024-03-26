@@ -40,6 +40,10 @@ async def update_category(id: int, updated_data: dict, db: Session = Depends(get
 
 @router.delete("/categories/{id}", status_code=204)
 async def delete_category(id: int, db: Session = Depends(get_db)):
+    # can't delete category with id 1, because it's set as a default
+    if id == 1:
+        raise HTTPException(status_code=404, detail="Can't delete the default category")
+    
     result = db.query(DbCategory).filter(DbCategory.id == id).delete()
     if result == 0:
         raise HTTPException(status_code=404, detail="Category not found")

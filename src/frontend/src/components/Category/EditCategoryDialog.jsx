@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Form, Input } from 'antd';
 import { update_category } from '@/services/api';
 
-const EditCategoryDialog = ({ visible, category, onCancel, onEdit }) => {
+const EditCategoryDialog = ({ isOpen, category, onCancel, onEdit }) => {
   const [form] = Form.useForm();
   const [confirmLoading, setConfirmLoading] = useState(false);
 
@@ -21,7 +21,7 @@ const EditCategoryDialog = ({ visible, category, onCancel, onEdit }) => {
 
   return (
     <Modal
-      open={visible}
+      open={isOpen}
       title="编辑分类"
       okText="保存"
       cancelText="取消"

@@ -11,11 +11,13 @@ const CategoryCard = ({ category }) => {
   const navigate = useNavigate();
   const [showEditDialog, setShowEditDialog] = useState(false);
 
-  const handleEdit = () => {
+  const handleEdit = (event) => {
+    event.stopPropagation();
     setShowEditDialog(true);
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (event) => {
+    event.stopPropagation();
     try {
       await delete_category(category?.id);
       // Refresh category list after successful deletion
@@ -25,7 +27,7 @@ const CategoryCard = ({ category }) => {
   };
 
   const handleCardClick = () => {
-    // navigate(`/category/${category?.id}`);
+    navigate(`/category/${category?.id}`);
   };
 
   return (
@@ -43,7 +45,14 @@ const CategoryCard = ({ category }) => {
             okText="确定"
             cancelText="取消"
           >
-            <Button type="text" danger key="delete">
+            <Button
+              type="text"
+              danger
+              key="delete"
+              onClick={(event) => {
+                event.stopPropagation();
+              }}
+            >
               <DeleteOutlined /> 删除
             </Button>
           </Popconfirm>
@@ -53,7 +62,7 @@ const CategoryCard = ({ category }) => {
         <Meta title={category?.name} />
       </Card>
       <EditCategoryDialog
-        open={showEditDialog}
+        isOpen={showEditDialog}
         category={category}
         onCancel={() => setShowEditDialog(false)}
         onEdit={(updatedCategory) => {
