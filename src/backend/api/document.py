@@ -80,6 +80,10 @@ async def update_document(document_id: int, update_data: dict, db: Session = Dep
         raise HTTPException(status_code=404, detail="Document not found")
 
     for key, value in update_data.items():
+        if (key == "category_id"):
+            category = db.query(DbCategory).filter(DbCategory.id == value).first()
+            if category is None:
+                raise HTTPException(status_code=404, detail="Document not found")
         setattr(document, key, value)
 
     db.commit()

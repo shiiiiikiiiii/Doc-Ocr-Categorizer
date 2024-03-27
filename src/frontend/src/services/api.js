@@ -74,7 +74,7 @@ export const delete_document = async (id) => {
  */
 export const update_document = async (id, document_data) => {
   try {
-    const response = await axios.patch(`${API_BASE_URL}/documents/${id}`, { document_data });
+    const response = await axios.patch(`${API_BASE_URL}/documents/${id}`, document_data);
     return response.data;
   } catch (error) {
     console.error('Error updating document category:', error);
@@ -86,7 +86,7 @@ export const update_document = async (id, document_data) => {
 export const get_image_url_by_document = async (id) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/images/${id}`);
-    return response.data;
+    return response.data.image_url;
   } catch (error) {
     console.error('Error fetching image URL by document ID:', error);
   }
