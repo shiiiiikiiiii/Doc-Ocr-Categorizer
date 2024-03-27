@@ -30,7 +30,7 @@ async def upload_document(file: UploadFile = File(...), db: Session = Depends(ge
     db.commit()
     
     # Find the most related document and update the category_id if necessary
-    most_related_category_id: DbDocument = find_most_related_document(document.id)
+    most_related_category_id: int = find_most_related_document(document.id)
     document = await update_category_id(db, document, most_related_category_id)
     
     return document

@@ -33,21 +33,22 @@ from db.models.db_model import DbDocument
 def find_most_related_document( document_id: int ):
     with Psycopg2ConnectionManager() as conn_manager:
         # Use cosine similarity calculation in pgvector
-        query = """
-        SELECT category_id
-        FROM document
-        WHERE id != %s
-        ORDER BY (SELECT 1 - COALESCE((nlp_result <-> (SELECT nlp_result FROM document WHERE id = %s)), 0) END)
-        LIMIT 1;
-        """
+        query = f"""
+            SELECT 
+                category_id
+            FROM "document"
+            WHERE id != {document_id}
+            ORDER BY (1 - (nlp_result <=> (SELECT nlp_result FROM "document" WHERE id = {document_id}))) DESC
+            LIMIT 3;
+            """
         
         cursor = conn_manager.cursor()
-        cursor.execute(query, (document_id, document_id))
+        cursor.execute(query)
         result = cursor.fetchone()
         
         cursor.close()
 
-    return result
+    return int(result[0])
 
 
 # Helper function to update the document's category_id based on the most related document
