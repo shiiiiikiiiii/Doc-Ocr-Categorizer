@@ -63,10 +63,18 @@ export const delete_document = async (id) => {
   }
 };
 
-
-export const update_document_category = async (id, category_id_param) => {
+/**
+ * Modify an existing document
+ * @param {id} int - The document to be modified
+ * @param {object} document_data - The document object that the document is to become.
+ * @param {number} [document_data.id] - The new id of the document.
+ * @param {string} [document_data.name] - The new name of the document.
+ * @returns {Promise<object>} A promise that resolves with the added category data.
+ * @example
+ */
+export const update_document = async (id, document_data) => {
   try {
-    const response = await axios.patch(`${API_BASE_URL}/documents/${id}/category`, { category_id: category_id_param });
+    const response = await axios.patch(`${API_BASE_URL}/documents/${id}`, { document_data });
     return response.data;
   } catch (error) {
     console.error('Error updating document category:', error);
@@ -98,10 +106,10 @@ export const get_all_categories = async () => {
 
 /**
  * Add a new category
- * @param {Object} category - The category object to be added.
+ * @param {object} category - The category object to be added.
  * @param {string} category.name - The name of the category.
  * @param {string} [category.description] - An optional description of the category.
- * @returns {Promise<Object>} A promise that resolves with the added category data.
+ * @returns {Promise<object>} A promise that resolves with the added category data.
  * @example
  */
 export const add_category = async (category) => {
@@ -124,12 +132,12 @@ export const add_category = async (category) => {
 
 /**
  * Modify an existing category
- * @param {id} int - The category to be modified
- * @param {Object} category_data - The category object that the category is to become.
- * @param {string} [category_data.id] - The new id of the category.
+ * @param {number} id - The category to be modified
+ * @param {object} category_data - The category object that the category is to become.
+ * @param {number} [category_data.id] - The new id of the category.
  * @param {string} [category_data.name] - The new name of the category.
  * @param {string} [category_data.description] - The new description of the category.
- * @returns {Promise<Object>} A promise that resolves with the added category data.
+ * @returns {Promise<object>} A promise that resolves with the added category data.
  * @example
  */
 export const update_category = async (id, category_data) => {

@@ -22,9 +22,9 @@
    
    - `DELETE /documents/{id}` - 删除特定文档。
 
-6. **修改文档所属分类：**
+6. **修改文档：**
    
-   - `PATCH /documents/{id}/category` - 手动修改特定文档所属的类别。
+   - `PATCH /documents/{id}` - 手动修改特定文档的信息, 如名称, 所属的类别。
 
 ### 图片相关API
 

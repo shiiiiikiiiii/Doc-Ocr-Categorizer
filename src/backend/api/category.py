@@ -27,12 +27,12 @@ async def create_category(category: PyCategoryInput, db: Session = Depends(get_d
 
 
 @router.patch("/categories/{id}", response_model=PyCategory)
-async def update_category(id: int, updated_data: dict, db: Session = Depends(get_db)):
+async def update_category(id: int, update_data: dict, db: Session = Depends(get_db)):
     category = db.query(DbCategory).filter(DbCategory.id == id).first()
     if category is None:
         raise HTTPException(status_code=404, detail="Category not found")
 
-    for key, value in updated_data.items():
+    for key, value in update_data.items():
         setattr(category, key, value)
 
     db.commit()

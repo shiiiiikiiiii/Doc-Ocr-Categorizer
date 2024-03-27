@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Form, Input } from 'antd';
-import { update_document_category } from '@/services/api';
+import { update_document } from '@/services/api';
 
 const UpdateCategoryForm = ({ visible, currentCategory, onCancel, onSuccess }) => {
   const [form] = Form.useForm();
@@ -10,7 +10,7 @@ const UpdateCategoryForm = ({ visible, currentCategory, onCancel, onSuccess }) =
     setConfirmLoading(true);
     try {
       const values = await form.validateFields();
-      const updatedCategory = await update_document_category(values?.category);
+      const updatedCategory = await update_document(values?.category);
       onSuccess(updatedCategory);
     } catch (error) {
       console.error('Error updating category:', error);

@@ -73,18 +73,14 @@ async def delete_document(id: int, db: Session = Depends(get_db)):
         }
 
 
-@router.patch("/documents/{document_id}/category", response_model=PyDocumentRtn)
-async def update_document_category(
-    document_id: int, category_id: int, db: Session = Depends(get_db)
-):
+@router.patch("/documents/{document_id}", response_model=PyDocumentRtn)
+async def update_document(document_id: int, update_data: dict, db: Session = Depends(get_db)):
     document = db.query(DbDocument).filter(DbDocument.id == document_id).first()
     if document is None:
         raise HTTPException(status_code=404, detail="Document not found")
 
-    category = db.query(DbCategory).filter(DbCategory.id == category_id).first()
-    if category is None:
-        raise HTTPException(status_code=404, detail="Category not found")
+    for key, value in update_data.items():
+        setattr(document, key, value)
 
-    document.category_id = category_id
     db.commit()
     return document
