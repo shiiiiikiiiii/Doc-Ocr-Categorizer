@@ -19,5 +19,5 @@ The main goal of this project is to design an automatic **document recognition a
 ## Docs
 
 - [Project Architecture](https://github.com/shiiiiikiiiii/DocOcrCategorizeer/tree/main/doc/ver0.1-architecture)
-- [Frontend](https://github.com/shiiiiikiiiii/DocOcrCategorizeer/tree/main/src/frontend)
-- [Backend(including ML Algorithm)](https://github.com/shiiiiikiiiii/DocOcrCategorizeer/tree/main/src/backend)
+- [Frontend](https://github.com/shiiiiikiiiii/DocOcrCategorizeer/tree/main/src/frontend/README.md)
+- [Backend(including ML Algorithm)](https://github.com/shiiiiikiiiii/DocOcrCategorizeer/tree/main/src/backend/README.md)
