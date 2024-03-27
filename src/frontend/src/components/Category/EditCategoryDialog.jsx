@@ -33,7 +33,7 @@ const EditCategoryDialog = ({ isOpen, category, onCancel, onEdit }) => {
       <Form form={form} layout="vertical" name="editCategory" initialValues={category}>
         <Form.Item
           name="name"
-          label="分类名称"
+          label="分类名称 (In English)"
           rules={[{ required: true, message: '请输入分类名称!' }]}
         >
           <Input />

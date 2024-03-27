@@ -46,7 +46,7 @@ const AddCategoryDialog: React.FC<{
       <Form form={form} layout="vertical" name="addCategory">
         <Form.Item
           name="name"
-          label="分类名称"
+          label="分类名称 (In English)"
           rules={[{ required: true }]}
         >
           <Input />

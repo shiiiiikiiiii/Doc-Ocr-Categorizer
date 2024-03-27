@@ -70,7 +70,7 @@ const DocumentDetailsModal = ({ isOpen, document, onCancel }) => {
             </Typography.Paragraph>
           </div>
         </Form.Item>
-        <Form.Item name="categoryId" label="分类ID">
+        <Form.Item name="categoryId" label="所属分类">
           <Select>
             {categories.map((category) => (
               <Select.Option key={category.id} value={category.id}>
@@ -79,7 +79,7 @@ const DocumentDetailsModal = ({ isOpen, document, onCancel }) => {
             ))}
           </Select>
         </Form.Item>
-        <Form.Item name="documentName" label="文档名称">
+        <Form.Item name="documentName" label="文档名称 (In English)">
           <Input />
         </Form.Item>
         <Form.Item label="下载文档图片">
