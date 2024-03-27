@@ -25,6 +25,7 @@ const AddCategoryDialog: React.FC<{
       };
       const newCategory = await add_category(newCategoryData);
       onAdd(Object(newCategory));
+      window.location.reload()
     } catch (error) {
       console.error('Error adding category:', error);
     } finally {

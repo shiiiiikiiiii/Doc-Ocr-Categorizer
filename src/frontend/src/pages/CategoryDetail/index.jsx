@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'umi';
 import { Row, Col, Spin } from 'antd';
 import DocumentDetailsModal from '@/components/Document/DocumentDetailsModal';
-import DocumentThumbnail from '@/pages/CategoryDetail/util/DocumentThumbnail';
+import DocumentCard from '@/components/Document/DocumentCard';
 import { get_documents_by_category } from '@/services/api';
 
 const CategoryDetails = () => {
@@ -43,7 +43,7 @@ const CategoryDetails = () => {
         <Row gutter={[16, 16]}>
           {documents.map((document) => (
             <Col key={document?.id} xs={24} sm={12} md={8} lg={6}>
-              <DocumentThumbnail
+              <DocumentCard
                 document={document}
                 onClick={() => handleDocumentClick(document)}
               />

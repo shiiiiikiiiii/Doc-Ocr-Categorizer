@@ -12,6 +12,7 @@ const EditCategoryDialog = ({ isOpen, category, onCancel, onEdit }) => {
       const values = await form.validateFields();
       const updatedCategory = await update_category(category?.id, values);
       onEdit(updatedCategory);
+      window.location.reload()
     } catch (error) {
       console.error('Error updating category:', error);
     } finally {

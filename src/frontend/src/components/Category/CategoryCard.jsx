@@ -21,6 +21,7 @@ const CategoryCard = ({ category }) => {
     try {
       await delete_category(category?.id);
       // Refresh category list after successful deletion
+      window.location.reload()
     } catch (error) {
       console.error('Error deleting category:', error);
     }
@@ -36,6 +37,9 @@ const CategoryCard = ({ category }) => {
         hoverable
         style={{ width: 240, marginRight: 16, marginBottom: 16 }}
         actions={[
+          <Button type="link" key="link">
+            详情
+          </Button>,
           <Button type="text" key="edit" onClick={handleEdit}>
             <EditOutlined /> 编辑
           </Button>,
