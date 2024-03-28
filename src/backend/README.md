@@ -8,10 +8,10 @@
     - Setup [pgvector](https://github.com/pgvector/pgvector).
     - Use **Alembic** for db migration.
         ```sh
-        # Generate alembic db migration scripts
+        # # Generate alembic db migration scripts
         # alembic revision --autogenerate -m "comment"
 
-        # Execute alembic db migration (to the newest version)
+        # # Execute alembic db migration (to the newest version)
         # alembic upgrade head
         ```
 
@@ -41,9 +41,9 @@
 
 For *xxx* CRUD functionality, follow the following steps to trace:
 
-1. `backend/pydantic_schemas/pydantic_schema.py`: Pydantic model
-2. `backend/db/models/db_model.py`: ORM definition
-3. `backend/api/xxx.py`: Router setting
+1. `backend/pydantic_schemas/pydantic_schema.py`: Pydantic models
+2. `backend/db/models/db_model.py`: SqlAlchemy models
+3. `backend/api/xxx.py`: Router settings
 4. `backend/api/*util*/`: helper functions
 
 ## ML Model
