@@ -23,3 +23,5 @@ npm run start
 3. `frontend/src/components/`: Components
 
 4. `frontend/src/services/api.js`: Call API
+
+5. `frontend/src/constants/index.js`: Constant values

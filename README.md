@@ -1,7 +1,5 @@
 # Doc-Ocr-Categorizer
 
-> This project is currently under development.
-
 ## Techniques
 
 - **Frontend:** _React_, _Antd_

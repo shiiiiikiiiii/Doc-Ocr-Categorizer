@@ -1,48 +1,67 @@
 import React, { useState } from 'react';
-import { Upload, message } from 'antd';
-import { InboxOutlined } from '@ant-design/icons';
-import UploadResultModal from '@/components/Document/UploadResultModal';
-import { upload_document_image } from '@/services/api';
+import { Upload, Button } from 'antd';
+import DocumentDetailsModal from '@/components/Document/DocumentDetailsModal';
+import { API_BASE_URL } from '@/constants';
 
 const UploadDocument = () => {
-  const [uploadResult, setUploadResult] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadedDocument, setUploadedDocument] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-  const handleUpload = async (file) => {
-    try {
-      const result = await upload_document_image(file);
-      setUploadResult(result);
-    } catch (error) {
-      console.error('Error uploading document:', error);
-      message.error('上传文档失败');
+  const handleUpload = async (info) => {
+    if (info.file.status === 'done') {
+      setUploading(false);
+      const response = info.file.response;
+      if (response) {
+        setUploadedDocument(response);
+        setIsVisible(true);
+      }
+      else {
+        console.error('Upload failed with response:', response);
+        console.error('Upload failed with info:', info.file.response.message);
+      }
+    }
+    else if (info.file.status === 'uploading') {
+      setUploading(true);
+    }
+    else if (info.file.status === 'error') {
+      setUploading(false);
+      console.error('Upload error:', info.file.response);
     }
   };
 
-  const handleCloseModal = () => {
-    setUploadResult(null);
+  const handleCancelModal = () => {
+    setIsVisible(false);
   };
 
   return (
-    <div>
-      <Upload.Dragger
+    <>
+      <Upload
         name="file"
-        multiple={false}
-        showUploadList={false}
-        customRequest={handleUpload}
+        action={`${API_BASE_URL}/upload`}
+        beforeUpload={(file) => {
+          // You might want to include an accept attribute in the Upload component to restrict file types
+          // based on the API requirements. For example:
+          // accept=".pdf, .doc, .docx, .xls, .xlsx, .txt"
+          return true;
+        }}
+        onChange={handleUpload}
+        showUploadList={{ showPreviewIcon: false, showRemoveIcon: false }}
+        disabled={uploading}
       >
-        <p className="ant-upload-drag-icon">
-          <InboxOutlined />
-        </p>
-        <p className="ant-upload-text">点击或拖拽文档到此区域进行上传</p>
-        <p className="ant-upload-hint">仅支持单个文档上传</p>
-      </Upload.Dragger>
-      {uploadResult && (
-        <UploadResultModal
-          visible={true}
-          uploadResult={uploadResult}
-          onCancel={handleCloseModal}
+        <Button type="primary" loading={uploading}>
+          上传文档
+        </Button>
+      </Upload>
+
+      {uploadedDocument && (
+        <DocumentDetailsModal
+          isOpen={isVisible}
+          document={uploadedDocument}
+          onCancel={handleCancelModal}
         />
       )}
-    </div>
+    </>
   );
 };
 

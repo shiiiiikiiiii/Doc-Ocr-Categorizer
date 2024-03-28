@@ -1,9 +1,8 @@
 import axios from 'axios';
+import { API_BASE_URL } from '@/constants';
 
-const API_BASE_URL = 'http://localhost:8001';
 
-
-// Document related API
+// This upload encapsulation is only for reference, for the api call should be called inside the Antd Upload component
 export const upload_document_image = async (file) => {
   const formData = new FormData();
   formData.append('file', file);
@@ -24,6 +23,8 @@ export const upload_document_image = async (file) => {
   }
 };
 
+
+// Following are document related API
 
 export const get_document_detail = async (id) => {
   try {
@@ -82,7 +83,8 @@ export const update_document = async (id, document_data) => {
 };
 
 
-// Pic related API
+// This is pic related API
+
 export const get_image_url_by_document = async (id) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/images/${id}`);
@@ -93,7 +95,8 @@ export const get_image_url_by_document = async (id) => {
 };
 
 
-// Category related API
+// Following are category related API
+
 export const get_all_categories = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}/categories`);
