@@ -14,8 +14,8 @@
 
 The main goal of this project is to design an automatic **document recognition and categorization** system, using **OCR** and **NLP** algorithms, combined with **recommendation algorithms**, to achieve intelligent processing of documents.
 
-## Docs
+## Documentations
 
-- [Project Architecture](https://github.com/shiiiiikiiiii/Doc-Ocr-Categorizer/tree/main/doc) (in Chinese)
-- [Frontend](https://github.com/shiiiiikiiiii/DocOcrCategorizeer/tree/main/src/frontend/README.md)
-- [Backend](https://github.com/shiiiiikiiiii/DocOcrCategorizeer/tree/main/src/backend/README.md) (including ML & DL Algorithms)
+- [Thorough-Introduction](https://github.com/shiiiiikiiiii/Doc-Ocr-Categorizer/tree/main/Introduction)
+- [Frontend-README](https://github.com/shiiiiikiiiii/Doc-Ocr-Categorizer/tree/main/src/frontend/README.md)
+- [Backend-README](https://github.com/shiiiiikiiiii/Doc-Ocr-Categorizer/tree/main/src/backend/README.md) (Including ML & DL Algorithms)
