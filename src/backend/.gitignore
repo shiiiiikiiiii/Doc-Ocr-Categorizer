@@ -257,3 +257,6 @@ $RECYCLE.BIN/
 
 # shell scripts
 *.sh
+
+# alembic files
+alembic.ini

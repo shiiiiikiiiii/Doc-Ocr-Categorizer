@@ -2,7 +2,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-URL_SOURCE = "postgres:postgres@localhost/doc_ocr_categorizeer"
+
+URL_SOURCE = "postgres:postgres@localhost/doc_ocr_categorizer_bs"
 SQLALCHEMY_DATABASE_URL = f"postgresql+psycopg2://{URL_SOURCE}"
 PGSQL2_DATABASE_URL = f"postgresql://{URL_SOURCE}"
 
