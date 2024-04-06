@@ -4,19 +4,12 @@ from sqlalchemy_utils import URLType
 from db.models.utils.mixins import Timestamp
 from db.db_setup import Base
 from pgvector.sqlalchemy import Vector
-import enum
+from db.models.utils.enums import Role, AccessType
+
 import sqlalchemy
 
 
-class Role(enum.Enum):
-    ADMIN = 0
-    DEFAULT = 1
-    TYPE_0 = 2
 
-
-class AccessType(enum.Enum):
-    PUBLIC = 0
-    PRIVATE = 1
 
 
 # Image SQLAlchemy ORM Model

@@ -8,6 +8,13 @@
     - Setup [pgvector](https://github.com/pgvector/pgvector).
     - Use **Alembic** for db migration.
         ```sh
+        # # Initialize alembic
+        # alembic init alembic
+        # # Then configure the `sqlalchemy.url` in alembic.ini file
+        # # Then add the following lines to alembic/env.py
+        # # # from main import Base
+        # # # from db.models.db_model import *
+
         # # Generate alembic db migration scripts
         # alembic revision --autogenerate -m "comment"
 
