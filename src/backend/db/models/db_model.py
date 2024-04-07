@@ -9,9 +9,6 @@ from db.models.utils.enums import Role, AccessType
 import sqlalchemy
 
 
-
-
-
 # Image SQLAlchemy ORM Model
 class DbImage(Timestamp, Base):
     __tablename__ = "image"
